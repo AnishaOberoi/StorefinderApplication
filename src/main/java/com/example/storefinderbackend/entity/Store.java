@@ -36,8 +36,8 @@ public class Store {
     @Column(name = "logo_image_url")
     private String logoImageUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private Location location;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "location_id", referencedColumnName = "id")
+//    private Location location;
 }
 
