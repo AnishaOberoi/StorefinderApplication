@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,8 +23,8 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
+//    @Column(name = "address")
+//    private String address;
 
     @Column(name = "contact_details")
     private String contactDetails;
@@ -33,11 +35,13 @@ public class Store {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "logo_image_url")
-    private String logoImageUrl;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    @Embedded
+    @Column(name= "location")
     private Location location;
+
+    @ElementCollection
+    @CollectionTable(name = "store_reviews", joinColumns = @JoinColumn(name = "store_id"))
+    @Column(name = "reviews")
+    private List<Reviews> reviews = new ArrayList<>();
 }
 

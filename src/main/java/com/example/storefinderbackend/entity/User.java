@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,24 +30,9 @@ public class User {
     private String password;
     @Column(name = "role")
     private String role;
-    @Column(name = "reg_date")
-    private String registrationDate;
 
-    private LocalDateTime createdAt;
-
-//    public User(){
-//
-//    }
-//    public User(Long id, String username, String email, String password, String role, String registrationDate, LocalDateTime createdAt){
-//        super();
-//        this.id=id;
-//        this.username=username;
-//        this.email=email;
-//        this.password=password;
-//        this.role=role;
-//        this.registrationDate=registrationDate;
-//        this.createdAt=createdAt;
-//    }
+    @Column(name="favStores")
+    private List<Integer> favStores=new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -87,19 +74,15 @@ public class User {
         this.role = role;
     }
 
-    public String getRegistrationDate() {
-        return registrationDate;
+    public List<Integer> getFavStores(){
+        return favStores;
     }
 
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
+    public void addFavStore(Integer id){
+        favStores.add(id);
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void removeFavStore(Integer id) {
+        favStores.remove(id);
     }
 }

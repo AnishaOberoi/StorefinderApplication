@@ -43,17 +43,19 @@ public class AuthController {
         String email=user.getEmail();
         String password= user.getPassword();
         String username= user.getUsername();
+        String role=user.getRole();
 
         User isEmailExist=userRepository.findByEmail(email);
 
         if(isEmailExist!=null){
-            throw new UserException("Email is already used");
+            throw new UserException("Email is already in use");
         }
 
         User createdUser=new User();
         createdUser.setEmail(email);
         createdUser.setPassword(passwordEncoder.encode(password));
         createdUser.setUsername(username);
+        createdUser.setRole(role);
 
         User savedUser=userRepository.save(createdUser);
 

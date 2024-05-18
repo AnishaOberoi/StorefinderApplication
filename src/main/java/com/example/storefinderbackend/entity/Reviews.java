@@ -11,9 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class Location {
-    private double latitude;
-    private double longitude;
-    private String address;
+public class Reviews {
+    private Long user_id;
+    private String review;
+    private int rating;
 }
-
