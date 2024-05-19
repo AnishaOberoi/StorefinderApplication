@@ -33,6 +33,7 @@ public class Store {
     private String description;
 
     @Column(name = "categories")
+
     private List<String> categories = new ArrayList<>();
 
     //@Embedded
