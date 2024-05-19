@@ -1,10 +1,10 @@
 package com.example.storefinderbackend.entity;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,24 +15,25 @@ import java.util.List;
 @Entity
 @Table(name = "stores")
 public class Store {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "name")
     private String name;
 
-    @Column(name = "address")
-    private String address;
+//    @Column(name = "address")
+//    private String address;
 
     @Column(name = "contact_details")
     private String contactDetails;
+
     @Column(name = "operating_hours")
     private String operatingHours;
+
     @Column(name = "description")
     private String description;
-
-    @Column(name = "logo_image_url")
-    private String logoImageUrl;
 
     @Embedded
     @Column(name= "location")
@@ -43,3 +44,4 @@ public class Store {
     @Column(name = "reviews")
     private List<Reviews> reviews = new ArrayList<>();
 }
+
