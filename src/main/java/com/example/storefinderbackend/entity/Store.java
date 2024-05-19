@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-//    @Column(name = "address")
-//    private String address;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "contact_details")
     private String contactDetails;
@@ -29,6 +30,9 @@ public class Store {
     private String operatingHours;
     @Column(name = "description")
     private String description;
+
+    @Column(name = "logo_image_url")
+    private String logoImageUrl;
 
     @Embedded
     @Column(name= "location")
