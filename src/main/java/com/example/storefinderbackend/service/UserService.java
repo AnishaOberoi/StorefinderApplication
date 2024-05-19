@@ -13,10 +13,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
     public User updateUser(Long id, User userDetails) {
         User user = getUserById(id);
         user.setUsername(userDetails.getUsername());
@@ -31,18 +35,18 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<Integer> getFavoriteStores(Long id) {
+    public List<Long> getFavoriteStores(Long id) {
         User user = getUserById(id);
         return user.getFavStores();
     }
 
-    public User addFavoriteStore(Long id, Integer storeId) {
+    public User addFavoriteStore(Long id, Long storeId) {
         User user = getUserById(id);
         user.addFavStore(storeId);
         return userRepository.save(user);
     }
 
-    public User removeFavoriteStore(Long id, Integer storeId) {
+    public User removeFavoriteStore(Long id, Long storeId) {
         User user = getUserById(id);
         user.removeFavStore(storeId);
         return userRepository.save(user);

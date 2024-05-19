@@ -23,9 +23,6 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-//    @Column(name = "address")
-//    private String address;
-
     @Column(name = "contact_details")
     private String contactDetails;
 
