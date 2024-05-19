@@ -31,8 +31,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    @ElementCollection
     @Column(name="favStores")
-    private List<Integer> favStores=new ArrayList<>();
+    private List<Long> favStores=new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -74,15 +75,15 @@ public class User {
         this.role = role;
     }
 
-    public List<Integer> getFavStores(){
+    public List<Long> getFavStores(){
         return favStores;
     }
 
-    public void addFavStore(Integer id){
-        favStores.add(id);
+    public void addFavStore(Long id){
+        this.favStores.add(id);
     }
 
-    public void removeFavStore(Integer id) {
-        favStores.remove(id);
+    public void removeFavStore(Long id) {
+        this.favStores.remove(id);
     }
 }
