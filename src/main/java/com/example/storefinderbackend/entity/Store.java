@@ -32,13 +32,54 @@ public class Store {
     @Column(name = "description")
     private String description;
 
-    @Embedded
-    @Column(name= "location")
-    private Location location;
+    //@Embedded
+    //private Location location;
 
     @ElementCollection
     @CollectionTable(name = "store_reviews", joinColumns = @JoinColumn(name = "store_id"))
-    @Column(name = "reviews")
     private List<Reviews> reviews = new ArrayList<>();
+
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContactDetails() {
+        return contactDetails;
+    }
+
+    public void setContactDetails(String contactDetails) {
+        this.contactDetails = contactDetails;
+    }
+
+    public String getOperatingHours() {
+        return operatingHours;
+    }
+
+    public void setOperatingHours(String operatingHours) {
+        this.operatingHours = operatingHours;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
 }
 
