@@ -32,6 +32,9 @@ public class Store {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "categories")
+    private List<String> categories = new ArrayList<>();
+
     //@Embedded
     //private Location location;
 
