@@ -3,6 +3,8 @@ import com.example.storefinderbackend.entity.Store;
 import com.example.storefinderbackend.repository.StoreRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StoreService {
     private final StoreRepository storeRepository;
@@ -33,6 +35,9 @@ public class StoreService {
 
     public Store findByName(String name) {
         return storeRepository.findByName(name);
+    }
+    public List<Store> findStoresByProductName(String productName) {
+        return storeRepository.findStoresByProductName(productName);
     }
 
 }

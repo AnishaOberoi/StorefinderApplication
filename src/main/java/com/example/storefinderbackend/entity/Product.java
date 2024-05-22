@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +29,6 @@ public class Product {
     @Column(name = "category")
     private String category;
 
-//    @Column(name = "stores")
-//    private List<Store> stores = new ArrayList<>();
+    @ManyToMany(mappedBy = "products")
+    private Set<Store> stores = new HashSet<>();
 }

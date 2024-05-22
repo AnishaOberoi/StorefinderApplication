@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -35,6 +37,14 @@ public class Store {
     @Column(name = "categories")
 
     private List<String> categories = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "store_product",
+            joinColumns = @JoinColumn(name = "store_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> products = new HashSet<>();
 
     //@Embedded
     //private Location location;

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/stores")
 public class StoreController {
@@ -23,6 +25,12 @@ public class StoreController {
     public ResponseEntity<Store> getStoreByName(@PathVariable String name) {
         Store store = storeService.findByName(name);
         return store != null ? ResponseEntity.ok(store) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/stores/product/{productName}")
+    public ResponseEntity<List<Store>> getStoresByProductName(@PathVariable String productName) {
+        List<Store> stores = storeService.findStoresByProductName(productName);
+        return stores.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(stores);
     }
 }
 
