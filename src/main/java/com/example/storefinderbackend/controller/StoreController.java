@@ -4,10 +4,7 @@ import com.example.storefinderbackend.entity.Store;
 import com.example.storefinderbackend.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,10 +24,21 @@ public class StoreController {
         return store != null ? ResponseEntity.ok(store) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/stores/product/{productName}")
+    @GetMapping("/product/{productName}")
     public ResponseEntity<List<Store>> getStoresByProductName(@PathVariable String productName) {
         List<Store> stores = storeService.findStoresByProductName(productName);
         return stores.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(stores);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Store> addStore(@RequestBody Store store) {
+        Store savedStore = storeService.addStore(store);
+        return ResponseEntity.ok(savedStore);
+    }
+    @PostMapping("/{storeId}/add-product/{productId}")
+    public ResponseEntity<Store> addProductToStore(@PathVariable Long storeId, @PathVariable Long productId) {
+        Store updatedStore = storeService.addProductToStore(storeId, productId);
+        return updatedStore != null ? ResponseEntity.ok(updatedStore) : ResponseEntity.notFound().build();
     }
 }
 

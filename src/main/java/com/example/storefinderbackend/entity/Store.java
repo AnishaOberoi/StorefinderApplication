@@ -46,8 +46,6 @@ public class Store {
     )
     private Set<Product> products = new HashSet<>();
 
-    //@Embedded
-    //private Location location;
 
     @ElementCollection
     @CollectionTable(name = "store_reviews", joinColumns = @JoinColumn(name = "store_id"))
