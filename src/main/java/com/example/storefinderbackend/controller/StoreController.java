@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/stores")
 public class StoreController {
     private final StoreService storeService;
+    @Autowired
     private StoreRepository storeRepository;
 
 
