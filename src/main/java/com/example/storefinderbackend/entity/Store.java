@@ -51,7 +51,9 @@ public class Store {
     @CollectionTable(name = "store_reviews", joinColumns = @JoinColumn(name = "store_id"))
     private List<Reviews> reviews = new ArrayList<>();
 
-    // Getters and setters
+    @Embedded
+    private Location location;
+
     public Long getId() {
         return id;
     }

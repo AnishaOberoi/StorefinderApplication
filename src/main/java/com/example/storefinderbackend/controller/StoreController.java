@@ -1,7 +1,10 @@
 package com.example.storefinderbackend.controller;
 
+import com.example.storefinderbackend.entity.Location;
 import com.example.storefinderbackend.entity.Store;
+import com.example.storefinderbackend.repository.StoreRepository;
 import com.example.storefinderbackend.service.StoreService;
+import com.example.storefinderbackend.util.DistanceCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,8 @@ import java.util.List;
 @RequestMapping("/stores")
 public class StoreController {
     private final StoreService storeService;
+    private StoreRepository storeRepository;
+
 
     @Autowired
     public StoreController(StoreService storeService) {
@@ -39,6 +44,23 @@ public class StoreController {
     public ResponseEntity<Store> addProductToStore(@PathVariable Long storeId, @PathVariable Long productId) {
         Store updatedStore = storeService.addProductToStore(storeId, productId);
         return updatedStore != null ? ResponseEntity.ok(updatedStore) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/nearest")
+    public Store getNearestStore(@RequestParam double userLat, @RequestParam double userLng) {
+        List<Store> stores = storeRepository.findAll();
+        Store nearestStore = null;
+        double nearestDistance = Double.MAX_VALUE;
+
+        for (Store store : stores) {
+            Location location = store.getLocation();
+            double distance = DistanceCalculator.calculateDistance(userLat, userLng, location.getLatitude(), location.getLongitude());
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestStore = store;
+            }
+        }
+        return nearestStore;
     }
 }
 

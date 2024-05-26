@@ -10,6 +10,8 @@ import java.util.List;
 public interface StoreRepository extends JpaRepository<Store, Long> {
     Store findByName(String name);
 
+    List<Store> findAll();
+
     @Query("SELECT s FROM Store s JOIN s.products p WHERE p.name = :productName")
     List<Store> findStoresByProductName(@Param("productName") String productName);
 }
