@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/stores")
 public class StoreController {
+    @Autowired
     private final StoreService storeService;
     @Autowired
     private StoreRepository storeRepository;
@@ -23,6 +24,12 @@ public class StoreController {
     public StoreController(StoreService storeService) {
         this.storeService = storeService;
     }
+
+    @GetMapping
+    public List<Store> getAllStores() {
+        return storeService.getAllStores();
+    }
+
 
     @GetMapping("/name/{name}")
     public ResponseEntity<Store> getStoreByName(@PathVariable String name) {

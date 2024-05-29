@@ -21,6 +21,10 @@ public class StoreService {
         this.storeRepository = storeRepository;
     }
 
+    public List<Store> getAllStores() {
+        return storeRepository.findAll();
+    }
+
     public Store getStoreById(Long id) {
         return storeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Store not found"));
