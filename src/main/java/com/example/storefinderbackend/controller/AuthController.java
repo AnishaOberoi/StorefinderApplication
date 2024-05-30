@@ -72,23 +72,28 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse>loginUserHandler(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<AuthResponse> loginUserHandler(@RequestBody LoginRequest loginRequest) {
+        try {
+            String username = loginRequest.getEmail();
+            String password = loginRequest.getPassword();
 
-        String username=loginRequest.getEmail();
-        String password=loginRequest.getPassword();
+            // Authenticate user
+            Authentication authentication = authenticate(username, password);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Authentication authentication=authenticate(username,password);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Generate JWT token
+            String token = jwtProvider.generateToken(authentication);
 
-        String token=jwtProvider.generateToken(authentication);
-
-        AuthResponse authResponse= new AuthResponse(null,null);
-        authResponse.setJwt(token);
-        authResponse.setMessage("Signin Success");
-
-        return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
-
+            // Respond with successful authentication
+            AuthResponse authResponse = new AuthResponse(token, "Signin Success");
+            return new ResponseEntity<>(authResponse, HttpStatus.OK);
+        } catch (BadCredentialsException e) {
+            // Respond with unauthorized status for failed authentication
+            AuthResponse authResponse = new AuthResponse(null, "Invalid email or password.");
+            return new ResponseEntity<>(authResponse, HttpStatus.UNAUTHORIZED);
+        }
     }
+
 
     private Authentication authenticate(String username, String password) {
 
