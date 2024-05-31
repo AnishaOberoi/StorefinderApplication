@@ -21,6 +21,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         User updatedUser = userService.updateUser(id, userDetails);
