@@ -75,15 +75,33 @@ public class User {
         this.role = role;
     }
 
-    public List<Long> getFavStores(){
+//    public List<Long> getFavStores(){
+//        return favStores;
+//    }
+//
+//    public void addFavStore(Long id){
+//        this.favStores.add(id);
+//    }
+//
+//    public void removeFavStore(Long id) {
+//        this.favStores.remove(id);
+//    }
+
+    public List<Long> getFavoriteStores() {
         return favStores;
     }
 
-    public void addFavStore(Long id){
-        this.favStores.add(id);
+    public void setFavoriteStores(List<Long> favStores) {
+        this.favStores = favStores;
     }
 
-    public void removeFavStore(Long id) {
-        this.favStores.remove(id);
+    public void addFavoriteStore(Long storeId) {
+        if (!favStores.contains(storeId)) {
+            favStores.add(storeId);
+        }
+    }
+
+    public void removeFavoriteStore(Long storeId) {
+        favStores.remove(storeId);
     }
 }

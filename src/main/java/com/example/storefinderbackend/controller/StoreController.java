@@ -37,6 +37,12 @@ public class StoreController {
         return store != null ? ResponseEntity.ok(store) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Store> getStoreById(@PathVariable Long id) {
+        Store store = storeService.getStoreById(id);
+        return store != null ? ResponseEntity.ok(store) : ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/product/{productName}")
     public ResponseEntity<List<Store>> getStoresByProductName(@PathVariable String productName) {
         List<Store> stores = storeService.findStoresByProductName(productName);

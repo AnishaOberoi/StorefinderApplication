@@ -26,8 +26,7 @@ public class StoreService {
     }
 
     public Store getStoreById(Long id) {
-        return storeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Store not found"));
+        return storeRepository.findById(id).orElse(null);
     }
 
     public Store updateStore(Long id, Store storeDetails) {

@@ -38,20 +38,37 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public List<Long> getFavoriteStores(Long id) {
-        User user = getUserById(id);
-        return user.getFavStores();
+//    public List<Long> getFavoriteStores(Long id) {
+//        User user = getUserById(id);
+//        return user.getFavStores();
+//    }
+//
+//    public User addFavoriteStore(Long id, Long storeId) {
+//        User user = getUserById(id);
+//        user.addFavStore(storeId);
+//        return userRepository.save(user);
+//    }
+//
+//    public User removeFavoriteStore(Long id, Long storeId) {
+//        User user = getUserById(id);
+//        user.removeFavStore(storeId);
+//        return userRepository.save(user);
+//    }
+
+    public List<Long> getFavoriteStoresByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user.getFavoriteStores();
     }
 
-    public User addFavoriteStore(Long id, Long storeId) {
-        User user = getUserById(id);
-        user.addFavStore(storeId);
+    public User addFavoriteStoreByUsername(String username, Long storeId) {
+        User user = userRepository.findByUsername(username);
+        user.addFavoriteStore(storeId);
         return userRepository.save(user);
     }
 
-    public User removeFavoriteStore(Long id, Long storeId) {
-        User user = getUserById(id);
-        user.removeFavStore(storeId);
+    public User removeFavoriteStoreByUsername(String username, Long storeId) {
+        User user = userRepository.findByUsername(username);
+        user.removeFavoriteStore(storeId);
         return userRepository.save(user);
     }
 }
