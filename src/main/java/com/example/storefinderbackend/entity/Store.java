@@ -47,6 +47,7 @@ public class Store {
     private Set<Product> products = new HashSet<>();
 
 
+    @Getter
     @ElementCollection
     @CollectionTable(name = "store_reviews", joinColumns = @JoinColumn(name = "store_id"))
     private List<Reviews> reviews = new ArrayList<>();
@@ -93,7 +94,6 @@ public class Store {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
 }
 

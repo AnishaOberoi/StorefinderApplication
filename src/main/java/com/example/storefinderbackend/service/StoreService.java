@@ -1,5 +1,6 @@
 package com.example.storefinderbackend.service;
 import com.example.storefinderbackend.entity.Product;
+import com.example.storefinderbackend.entity.Reviews;
 import com.example.storefinderbackend.entity.Store;
 import com.example.storefinderbackend.repository.ProductRepository;
 import com.example.storefinderbackend.repository.StoreRepository;
@@ -39,7 +40,7 @@ public class StoreService {
         return storeRepository.save(store);
     }
 
-    public void deleteUser(Long id) {
+    public void deleteStore(Long id) {
         Store store = getStoreById(id);
         storeRepository.delete(store);
     }
@@ -68,5 +69,18 @@ public class StoreService {
 
         return null;
     }
+
+    public Store addReviewToStore(Long id, Reviews review) {
+        Optional<Store> optionalStore = storeRepository.findById(id);
+        if (optionalStore.isPresent()) {
+            Store store = optionalStore.get();
+            store.getReviews().add(review);
+            return storeRepository.save(store);
+        } else {
+            throw new RuntimeException("Store not found with id: " + id);
+        }
+    }
+
+
 
 }
